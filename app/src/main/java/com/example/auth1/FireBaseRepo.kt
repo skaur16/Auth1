@@ -14,7 +14,7 @@ class FireBaseRepo {
         address : String
     ){
 
-       /* val profile = Profile(
+        val profile = Profile(
             name, age, mail, address,
 
             )
@@ -36,7 +36,7 @@ class FireBaseRepo {
             .await()
             .toObjects(Profile::class.java)
 
-*/
+
     }
 
 

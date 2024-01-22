@@ -1,7 +1,11 @@
 package com.example.auth1
 
+import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel(){
     val firebase = FireBaseRepo()
@@ -17,7 +21,7 @@ class MainViewModel : ViewModel(){
     var finalmail = mutableStateOf("")
     var finaladdress = mutableStateOf("")
 
-    //var listOfUsers = mutableStateOf(listOf(Profile()))
+    var listOfUsers = mutableStateOf(listOf(Profile()))
 
     var submit = mutableStateOf(false)
 
@@ -28,6 +32,22 @@ class MainViewModel : ViewModel(){
             finalmail.value,
             finaladdress.value
         )
+    }
+
+    fun toGetData(mail:String): MutableState<List<Profile>> {
+        viewModelScope.launch {
+            Log.e("LIST", listOfUsers.toString())
+            firebase.getUserData(mail).also {
+                if (it != null) {
+                    listOfUsers.value = it
+                    Log.e("LIST", listOfUsers.toString())
+                }
+
+            }
+
+        }
+        return listOfUsers
+
     }
 
 }
