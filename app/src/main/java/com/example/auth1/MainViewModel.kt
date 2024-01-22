@@ -4,8 +4,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel(){
-    //val firebase = FireBaseRepo()
-    //val profile = mutableStateOf(Profile())
+    val firebase = FireBaseRepo()
+    val profile = mutableStateOf(Profile())
 
     var name = mutableStateOf("")
     var age = mutableStateOf("")
@@ -21,13 +21,13 @@ class MainViewModel : ViewModel(){
 
     var submit = mutableStateOf(false)
 
-    /*fun toSendData() {
+    fun toSendData() {
         firebase.sendData(
             finalname.value,
             finalage.value,
             finalmail.value,
             finaladdress.value
         )
-    }*/
+    }
 
 }
