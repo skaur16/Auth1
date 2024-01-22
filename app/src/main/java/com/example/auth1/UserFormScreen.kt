@@ -51,10 +51,11 @@ fun UserForm(mainviewmodel: MainViewModel, nav: NavHostController) {
             }, label = { Text(text = "Age") })
 
 
-            TextField(value = mainviewmodel.mail.value, onValueChange = {
-                mainviewmodel.mail.value = it
-                mainviewmodel.finalmail.value = mainviewmodel.mail.value
-            }, label = { Text(text = "Mail Id") })
+            TextField(value = mainviewmodel.finalmail.value,
+                onValueChange = {
+
+                },
+                label = { Text(text = "Mail")}  )
 
 
             TextField(value = mainviewmodel.address.value, onValueChange = {
@@ -89,7 +90,7 @@ fun UserForm(mainviewmodel: MainViewModel, nav: NavHostController) {
                 Spacer(modifier = Modifier.width(50.dp))
 
                 Button(onClick = {
-                    nav.navigate("MyProfile")
+                    nav.navigate("MyProfileScreen")
                 }) {
                     Text(text="View My Profile")
                 }

@@ -25,6 +25,8 @@ class MainViewModel : ViewModel(){
 
     var submit = mutableStateOf(false)
 
+    var navigation = mutableStateOf(false)
+
     fun toSendData() {
         firebase.sendData(
             finalname.value,
