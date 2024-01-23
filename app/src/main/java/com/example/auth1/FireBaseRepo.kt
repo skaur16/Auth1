@@ -1,5 +1,6 @@
 package com.example.auth1
 
+import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -39,5 +40,17 @@ class FireBaseRepo {
 
     }
 
+    fun sendMessage(message:String,profile: Profile){
+
+        val hash = hashMapOf(
+            "Message:" to message)
+
+        Log.e("MESSAGE",message)
+
+        db.collection("Chats")
+            .document(profile.mail)
+            .set(message)
+
+    }
 
 }

@@ -34,13 +34,13 @@ fun ListOfUsers(mainviewmodel: MainViewModel, nav: NavHostController) {
         LazyColumn {
             mainviewmodel.listOfUsers = mainviewmodel.toGetData(mainviewmodel.finalmail.value)
             items(mainviewmodel.listOfUsers.value) {
-                ProfileCard(it)
+                ProfileCard(it,nav)
             }
         }
     }
 }
 @Composable
-fun ProfileCard(profile: Profile) {
+fun ProfileCard(profile: Profile,nav: NavHostController) {
     Box {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -60,7 +60,7 @@ fun ProfileCard(profile: Profile) {
                 Text(text = "Username: ${profile.name}")
                 //modifier = Modifier.border()
                 Text(text = "Gmail: ${profile.mail}")
-                Button(onClick = { /*nav.navigate("")*/ }) {
+                Button(onClick = { nav.navigate("chat_screen") }) {
                     Text(text = "Chat")
                 }
             }

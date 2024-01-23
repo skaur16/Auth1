@@ -26,6 +26,7 @@ class MainViewModel : ViewModel(){
     var submit = mutableStateOf(false)
 
     var navigation = mutableStateOf(false)
+    var messagge = mutableStateOf("")
 
     fun toSendData() {
         firebase.sendData(
@@ -50,6 +51,10 @@ class MainViewModel : ViewModel(){
         }
         return listOfUsers
 
+    }
+
+    fun sendMessage(){
+        firebase.sendMessage(messagge.value, profile.value)
     }
 
 }

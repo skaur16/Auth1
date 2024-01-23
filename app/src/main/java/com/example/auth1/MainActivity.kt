@@ -151,6 +151,7 @@ fun NavScreens(mainviewmodel: MainViewModel, loginLauncherFlow: (() -> Unit) -> 
         composable("UserFormScreen"){ UserForm(mainviewmodel , nav )}
         composable("MyProfileScreen"){ MyProfile(mainviewmodel , nav  )}
         composable("ListOfProfilesScreen"){ ListOfUsers(mainviewmodel , nav)}
+        composable("chat_screen"){Chat(mainviewmodel,nav)}
     }
 }
 
