@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -46,12 +47,9 @@ class MainActivity : ComponentActivity() {
                 ) {
 
 
-                   if(mainviewmodel.navigation.value){
-                       NavScreens(mainviewmodel)
-                   }
-                    else{
-                       App(::launchLoginFlow,mainviewmodel)
-                   }
+
+                       NavScreens(mainviewmodel, ::launchLoginFlow)
+
                     }
 
                 }
@@ -100,13 +98,18 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun App(launcherLoginFlow: (() -> Unit) -> Unit, mainviewmodel: MainViewModel) {
+fun App(
+    launcherLoginFlow: (() -> Unit) -> Unit,
+    mainviewmodel: MainViewModel,
+    nav: NavHostController
+) {
 
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
+
         Button(onClick = {
 
             launcherLoginFlow {
@@ -123,7 +126,7 @@ fun App(launcherLoginFlow: (() -> Unit) -> Unit, mainviewmodel: MainViewModel) {
                     Log.e("EMAIL AFTER",mainviewmodel.finalmail.value)
 
                     Log.e("NAVHOST",mainviewmodel.navigation.value.toString())
-                    mainviewmodel.navigation.value = true
+                    nav.navigate("UserFormScreen")
                 }
 
 
@@ -140,10 +143,11 @@ fun App(launcherLoginFlow: (() -> Unit) -> Unit, mainviewmodel: MainViewModel) {
 
 
 @Composable
-fun NavScreens(mainviewmodel: MainViewModel) {
+fun NavScreens(mainviewmodel: MainViewModel, loginLauncherFlow: (() -> Unit) -> Unit) {
     val nav = rememberNavController()
-    NavHost(navController = nav, startDestination = "UserFormScreen" ){
+    NavHost(navController = nav, startDestination = "login_screen" ){
 
+        composable("login_screen"){ App(loginLauncherFlow, mainviewmodel,nav) }
         composable("UserFormScreen"){ UserForm(mainviewmodel , nav )}
         composable("MyProfileScreen"){ MyProfile(mainviewmodel , nav  )}
         composable("ListOfProfilesScreen"){ ListOfUsers(mainviewmodel , nav)}
